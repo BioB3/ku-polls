@@ -9,6 +9,11 @@ from .models import Question, Choice
 
 
 class IndexView(generic.ListView):
+    """
+    Display the most recent 5 poll questions.
+
+    :return: a rendered template with the most recent 5 questions
+    """
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
@@ -22,6 +27,12 @@ class IndexView(generic.ListView):
 
 
 class DetailView(generic.DetailView):
+    """
+    Display the detail of a question.
+
+    :param pk: primary key of the question
+    :return: a rendered template with the question's details
+    """
     model = Question
     template_name = 'polls/detail.html'
 
@@ -33,11 +44,24 @@ class DetailView(generic.DetailView):
 
 
 class ResultsView(generic.DetailView):
+    """
+    Display the result of a question.
+
+    :return: a rendered template with the question's result
+    """
     model = Question
     template_name = 'polls/results.html'
 
 
 def vote(request, question_id):
+    """
+    Handles voting in a question.
+
+    :param request: request from the user
+    :param question_id: id of the question
+    :return: redirect to the result page or
+             the detail page with error message if no choice was selected
+    """
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])

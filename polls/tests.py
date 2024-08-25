@@ -10,9 +10,11 @@ def create_question(question_text, days):
     given number of 'days' offset to now (negative for questions
     published in the past, positive for questions that have yet to be
     published).
-    
+
     :param question_text: the text of the question to be created
     :param days: the number of days offset for the question's pub_date
+    :return: a Question with question_text as the text and the current time
+             + days amount of offset as the publication date
     """
     time = timezone.now() + datetime.timedelta(days=days)
     return Question.objects.create(question_text=question_text, pub_date=time)
