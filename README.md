@@ -23,7 +23,7 @@ All project documents are in the [Project Wiki](../../wiki/Home).
 - [Project Plan](../../wiki/Project%20Plan)
 
 ### Iteration Plans
-- [Iteration 1](../..wiki/Iteration%201%20Plan) and [task board](https://github.com/users/BioB3/projects/2/views/2)
+- [Iteration 1](https://github.com/BioB3/ku-polls/wiki/Iteration-1-Plan) and [task board](https://github.com/users/BioB3/projects/2/views/2)
 - Iteration 2 and task board
 - Iteration 3 and task board
 - Iteration 4 and task board
