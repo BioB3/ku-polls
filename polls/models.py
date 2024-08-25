@@ -19,7 +19,8 @@ class Question(models.Model):
         :return: True if pub_date is within the last 24 hours,
                  False otherwise
         """
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
 
 class Choice(models.Model):
