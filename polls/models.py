@@ -50,7 +50,7 @@ class Question(models.Model):
         """
         now = timezone.now()
         if self.end_date is not None:
-            return self.end_date >= now >= self.pub_date
+            return self.end_date > now >= self.pub_date
         else:
             return now >= self.pub_date
 
