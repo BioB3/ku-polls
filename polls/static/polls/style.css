@@ -3,7 +3,6 @@ ul {
 }
 
 .button {
-  background-color: aquamarine;
   border: 2px solid black;
   border-radius: 8px;
   color: black;
@@ -16,17 +15,30 @@ ul {
   margin: 5px;
 }
 
-.center-text {
-  text-align: center;
+.vote-button {
+  background-color: aquamarine;
+}
+
+.results-button {
+  background-color: rgb(200, 238, 140);
+}
+
+.home-button {
+  background-color: aliceblue;
 }
 
 .button:hover {
-  background-color: chartreuse;
+  background-color:brown;
+  color: white;
 }
 
 .center {
   margin-left: auto;
   margin-right: auto;
+}
+
+.center-text {
+  text-align: center;
 }
 
 th {
@@ -39,10 +51,6 @@ th, td {
   border-bottom: 1px solid gainsboro;
 }
 
-td a {
-  color: green;
-}
-
 body {
   background: white url("images/background.png") no-repeat;
   background-repeat: no-repeat;
@@ -51,7 +59,7 @@ body {
 }
 
 .index-header {
-  color: limegreen;
+  color:forestgreen;
   font-size: 3em;
   font-weight: bold;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -69,4 +77,10 @@ body {
   font-style: italic;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode',
   'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.end_date {
+  color:blue;
+  font-size: 1.1em;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

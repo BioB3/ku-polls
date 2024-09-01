@@ -24,15 +24,24 @@
   <table class="center">
     {% for question in latest_question_list %}
     <tr>
+      <td>{{question.question_text }}</td>
+      {% if question.can_vote %}
       <td>
-        <a href="{% url 'polls:detail' question.id %}">
-          {{question.question_text }}
-        </a>
+        <p style="color:limegreen;">Open</p>
       </td>
+
       <td>
-        <a href="{% url 'polls:results' question.id %}" class="button">
-          <span>Results</span>
-        </a>
+        <a href="{% url 'polls:detail' question.id %}" class="button vote-button">Vote</a>
+      </td>
+      {% else %}
+      <td>
+        <p style="color:crimson;">Closed</p>
+      </td>
+      <td></td>
+      {% endif %}
+
+      <td>
+        <a href="{% url 'polls:results' question.id %}" class="button results-button">Results</a>
       </td>
     </tr>
     {% endfor %}

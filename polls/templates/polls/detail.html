@@ -16,6 +16,7 @@
       {{ question.question_text  }}
     </h1>
   </legend>
+  <p class="end_date">End date: {{question.end_date}}</p>
   {% if messages %}
     <ul class="messages">
       {% for message in messages %}
@@ -33,9 +34,9 @@
     </label><br>
   {% endfor %}
 </fieldset>
-<button type="submit" class="button">Vote</button>
-<a href="{% url 'polls:results' question.id %}" class="button">Results</a>
-<a href="{% url 'polls:index' %}" class="button">Home</a>
+<button type="submit" class="button vote-button">Submit Vote</button>
+<a href="{% url 'polls:results' question.id %}" class="button results-button">Results</a>
+<a href="{% url 'polls:index' %}" class="button home-button">Home</a>
 </form>
 
 </html>
