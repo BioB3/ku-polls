@@ -88,16 +88,17 @@ class QuestionDetailViewTests(TestCase):
     """Tests for QuestionDetailView."""
 
     def test_future_question(self):
-        """Detail view return 404 for future questions.
+        """Detail view redirect to index page for future questions.
 
         The detail view of a question with a pub_date in the future
-        returns a 404 not found.
+        redirect user to index page with error message.
         """
         future_question = create_question(question_text='Future question.',
                                           days=5)
         url = reverse('polls:detail', args=(future_question.id,))
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertRedirects(response, '/polls/', status_code=302,
+                             target_status_code=200)
 
     def test_past_question(self):
         """Questions text are displayed for past question.
