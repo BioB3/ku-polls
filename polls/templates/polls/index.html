@@ -8,17 +8,17 @@
   <title>KU Polls</title>
 </head>
 
+<h1 class="index-header center-text">KU Polls</h1>
+
 {% if messages %}
 <ul class="messages">
   {% for message in messages %}
-  <li> {% if message.tags %}{% endif %}
-    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}{% endif %}
-    {{ message }}
+  <li class="{{message.tags}} center-text">
+    {{message}}
   </li>
   {% endfor %}
 </ul>
 {% endif %}
-<h1 class="index-header center-text">KU Polls</h1>
 {% if latest_question_list %}
   <div style="overflow-x: auto;"></div>
   <table class="center">
