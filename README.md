@@ -1,6 +1,6 @@
 # KU Polls
 An application to conduct online polls and surveys based
-on the [Django Tutorial project](TODO-write-URL-of-the-django-tutorial-here), with
+on the [Django Tutorial project](https://docs.djangoproject.com/en/4.1/intro/tutorial01/), with
 additional features.
 
 This app was created as part of the [Individual Software Process](
@@ -8,7 +8,18 @@ https://cpske.github.io/ISP) course at [Kasetsart University](https://www.ku.ac.
 
 ## Installation
 
-To be added.
+#### Clone this repository or download it as a zip and extract it
+```
+git clone https://github.com/BioB3/ku-polls.git
+```
+#### Navigate to the project directory
+```
+cd ku-polls
+```
+#### Install all the packages required by the program
+```
+pip install -r requirements.txt
+```
 
 ## Running the Application
 
@@ -23,7 +34,7 @@ All project documents are in the [Project Wiki](../../wiki/Home).
 - [Project Plan](../../wiki/Project%20Plan)
 
 ### Iteration Plans
-- [Iteration 1](https://github.com/BioB3/ku-polls/wiki/Iteration-1-Plan) and [task board](https://github.com/users/BioB3/projects/2/views/2)
-- Iteration 2 and task board
-- Iteration 3 and task board
-- Iteration 4 and task board
+- [Iteration 1](../../wiki/Iteration-1-Plan)
+- [Iteration 2](../../wiki/Iteration-2-Plan)
+- Iteration 3
+- Iteration 4
