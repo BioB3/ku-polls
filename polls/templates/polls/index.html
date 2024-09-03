@@ -9,6 +9,15 @@
 </head>
 
 <h1 class="index-header center-text">KU Polls</h1>
+{% if user.is_authenticated %}
+    Welcome back, {{ user.username }}
+    <form action="{% url 'logout' %}" method="post"> 
+      {% csrf_token %} 
+      <button type="submit">Log Out</button> 
+     </form> 
+{% else %}
+   Please <a href="{% url 'login' %}?next={{request.path}}">Login</a>
+{% endif %}
 
 {% if messages %}
 <ul class="messages">

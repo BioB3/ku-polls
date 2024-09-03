@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Question, Choice
 
 
@@ -94,7 +95,7 @@ class ResultsView(generic.DetailView):
             return HttpResponseRedirect(reverse("polls:index"))
         return super().get(request, *args, **kwargs)
 
-
+@login_required
 def vote(request, question_id):
     """Handle voting in a question.
 
