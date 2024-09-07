@@ -6,7 +6,7 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Question, Choice
+from .models import Question, Choice, Vote
 
 
 class IndexView(generic.ListView):
@@ -111,8 +111,14 @@ def vote(request, question_id):
         messages.error(request, "You didn't select a choice.")
         return HttpResponseRedirect(reverse('polls:detail',
                                             args=(question_id,)))
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        return HttpResponseRedirect(reverse('polls:results',
-                                            args=(question_id,)))
+    try:
+        vote = request.user.vote_set.get(choice__question=question)
+        vote.choice = selected_choice
+        vote.save()
+        messages.success(request,
+                         f"Your vote was changed to '{selected_choice.choice_text}'.")
+    except (KeyError, Vote.DoesNotExist):
+        vote = Vote.objects.create(user=request.user, choice=selected_choice)
+        messages.success(request,
+                         f"You voted for '{selected_choice.choice_text}'.")
+    return HttpResponseRedirect(reverse('polls:results', args=(question_id,)))
