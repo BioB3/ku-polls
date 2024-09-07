@@ -63,6 +63,18 @@ class DetailView(generic.DetailView):
             return HttpResponseRedirect(reverse("polls:index"))
         return super().get(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        """Create context dictionary used to render the template."""
+        context = super().get_context_data(**kwargs)
+        try: 
+            selected_choice = kwargs["object"].choice_set.filter(
+                vote__user=self.request.user).first()
+            vote = Vote.objects.get(user=self.request.user, choice=selected_choice)
+        except (TypeError, KeyError, Vote.DoesNotExist):
+            vote = None
+        context['vote'] = vote
+        return context
+
 
 class ResultsView(generic.DetailView):
     """Display the result of a question.
