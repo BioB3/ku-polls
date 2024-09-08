@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'polls/style.css' %}">
-  <title>{{question.question_text}} - Detail</title>
-</head>
+{% extends "polls/base_template.html" %}
 
+{% block title %}
+  <title>{{question.question_text}} - Detail</title>
+{% endblock %}
+
+{% block content %}  
 <form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
 <fieldset>
@@ -17,19 +14,14 @@
     </h1>
   </legend>
   <p class="end_date">End date: {{question.end_date}}</p>
-  {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-      <li class="{{message.tags}} center-text">
-        {{message}}
-      </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-
   {% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{
-      forloop.counter }}" value="{{ choice.id}}">
+    {% if vote and choice == vote.choice %}
+      <input type="radio" name="choice" id="choice{{
+        forloop.counter }}" value="{{ choice.id }}" checked="true">
+    {% else %}
+      <input type="radio" name="choice" id="choice{{
+        forloop.counter }}" value="{{ choice.id }}">
+    {% endif %}
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}
     </label><br>
   {% endfor %}
@@ -38,5 +30,6 @@
 <a href="{% url 'polls:results' question.id %}" class="button results-button">Results</a>
 <a href="{% url 'polls:index' %}" class="button home-button">Home</a>
 </form>
+{% endblock %}
 
 </html>
