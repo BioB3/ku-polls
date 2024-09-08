@@ -92,3 +92,15 @@ class UserAuthTest(django.test.TestCase):
         self.assertEqual(response.status_code, 302)  # could be 303
         login_with_next = f"{reverse('login')}?next={vote_url}"
         self.assertRedirects(response, login_with_next )
+
+    def test_invalid_user(self):
+        """User can't login if the username is not registered."""
+        invalid_username = self.username + "1234"
+        user = authenticate(username=invalid_username, password=self.password)
+        self.assertIsNone(user)
+
+    def test_invalid_password(self):
+        """User can't login if the password is wrong."""
+        invalid_password = self.password + "1234"
+        user = authenticate(username=self.username, password=invalid_password)
+        self.assertIsNone(user)

@@ -156,12 +156,14 @@ def vote(request, question_id):
 
 def get_client_ip(request):
     """Get the visitor's IP address using request headers."""
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
+    if request is not None:
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+    return None
 
 @receiver(user_logged_in)
 def user_login(sender, request, user, **kwargs):
