@@ -1,33 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+{% extends "polls/base_template.html" %}
+
+{% block title %}
   <title>KU Polls</title>
-</head>
+{% endblock %}
 
-<h1 class="index-header center-text">KU Polls</h1>
-{% if user.is_authenticated %}
-    Welcome back, {{ user.username }}
-    <form action="{% url 'logout' %}" method="post"> 
-      {% csrf_token %} 
-      <button type="submit">Log Out</button> 
-     </form> 
-{% else %}
-   Please <a href="{% url 'login' %}?next={{request.path}}">Login</a>
-{% endif %}
-
-{% if messages %}
-<ul class="messages">
-  {% for message in messages %}
-  <li class="{{message.tags}} center-text">
-    {{message}}
-  </li>
-  {% endfor %}
-</ul>
-{% endif %}
+{% block content %}
 {% if latest_question_list %}
   <div style="overflow-x: auto;"></div>
   <table class="center">
@@ -59,5 +36,6 @@
 {% else %}
   <p>No polls are available.</p>
 {% endif %}
+{% endblock %}
 
 </html>

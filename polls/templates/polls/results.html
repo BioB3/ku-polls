@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+{% extends "polls/base_template.html" %}
+
+{% block title %}
   <title>{{question.question_text}} - Results</title>
-</head>
-{% if messages %}
-<ul class="messages">
-  {% for message in messages %}
-  <li class="{{message.tags}} center-text">
-    {{message}}
-  </li>
-  {% endfor %}
-</ul>
-{% endif %}
+{% endblock %}
+
+{% block content %}
 <h1 class="header center-text">
   {{ question.question_text }}
 </h1>
@@ -37,5 +26,6 @@
 <div class="center-text">
   <a href="{% url 'polls:index' %}" class="button center home-button">Home</a>
 </div>
+{% endblock %}
 
 </html>
