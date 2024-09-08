@@ -9,18 +9,24 @@
 
 <body>
   {% block header %}
-  <div>
-    <h1 class="index-header center-text">KU Polls</h1>
+  <div class="header-container">
+    <h1 class="index-header">KU Polls</h1>
     {% if user.is_authenticated %}
-      <form action="{% url 'logout' %}" method="post"> 
+      <form action="{% url 'logout' %}" method="post" class="header-container"> 
         {% csrf_token %}
-        <h2 style="text-align: right;">Welcome back, {{ user.username }} </h2>
-        <button type="submit" class="button">Log Out</button> 
-      </form> 
+        <h2 style="text-align: right;">user: {{ user.username }} </h2>
+        &nbsp;
+        <button type="submit" class="button auth-button">Log Out</button> 
+      </form>
     {% else %}
-      <a href="{% url 'login' %}?next={{request.path}}" class="button">
-        Login
-      </a>
+      <div class="header-container">
+        <a href="{% url 'login' %}?next={{request.path}}" class="button auth-button">
+            Login
+        </a>
+        <a href="{% url 'signup' %}?next={{request.path}}" class="button auth-button">
+            Sign-up
+        </a>
+      </div>
     {% endif %}
   </div>
 
