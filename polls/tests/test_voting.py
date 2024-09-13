@@ -4,7 +4,8 @@ from django.urls import reverse
 
 from polls.models import Choice, Question
 from django.contrib.auth.models import User
-from polls.tests.question_creation import create_question, create_question_with_end_date
+from polls.tests.question_creation import (create_question,
+                                           create_question_with_end_date)
 
 
 class CanVoteTests(TestCase):
@@ -45,6 +46,7 @@ class VotingTest(TestCase):
     """Test of voting function."""
 
     def setUp(self):
+        """Create user, question, choices, and url."""
         super().setUp()
         self.username = "testuser"
         self.password = "FatChance!"
@@ -57,7 +59,7 @@ class VotingTest(TestCase):
         self.user1.save()
         q = Question.objects.create(question_text="First Poll Question")
         q.save()
-        for n in range(1,4):
+        for n in range(1, 4):
             choice = Choice(choice_text=f"Choice {n}", question=q)
             choice.save()
         self.question = q
@@ -91,3 +93,12 @@ class VotingTest(TestCase):
         for _ in range(3):
             self.client.post(self.url, form_data)
         self.assertEqual(self.choice.votes, 1)
+
+    def test_remove_vote(self):
+        """Users can remove their vote after submitting."""
+        form_data = {"choice": f"{self.choice.id}"}
+        remove_vote_url = reverse('polls:remove_vote', args=[self.question.id])
+        self.client.post(self.url, form_data)
+        self.assertEqual(1, self.user1.vote_set.all().count())
+        self.client.post(remove_vote_url, {})
+        self.assertEqual(0, self.user1.vote_set.all().count())

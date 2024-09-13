@@ -27,9 +27,15 @@
   {% endfor %}
 </fieldset>
 <button type="submit" class="button vote-button">Submit Vote</button>
+</form>
+{% if vote %}
+<form action="{% url 'polls:remove_vote' question.id %}" method="post">
+  {% csrf_token %}
+  <button type="submit" class="button vote-button">Remove Vote</button>
+</form>
+{% endif %}
 <a href="{% url 'polls:results' question.id %}" class="button results-button">Results</a>
 <a href="{% url 'polls:index' %}" class="button home-button">Home</a>
-</form>
 {% endblock %}
 
 </html>
