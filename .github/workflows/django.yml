@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: "*"
+    branches: '**'
   pull_request:
-    branches: "*"
+    branches: '**'
 
 jobs:
   build:
@@ -33,4 +33,4 @@ jobs:
         echo "ALLOWED_HOSTS=testserver" >> .env
     - name: Run Tests
       run: |
-        python manage.py test tests
+        python manage.py test polls/tests
