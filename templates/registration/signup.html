@@ -1,21 +1,37 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - KU Polls</title>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'polls/auth.css' %}">
+    <title>Sign-Up - KU Polls</title>
+  </head>
 
-<h2>Register</h2>
-<form method="POST">
-    {% csrf_token %}
-    <table style="padding: 2ex;">
-    {{ form.as_table }}
-    <tr>
-    <td colspan="2">
-    <button type="submit">Register</button>
-    </td>
-    </tr>
-    </table>
-</form>
+<div class="auth">
+  <div class="form">
+    <form class="auth-form" method="post">
+      {% csrf_token %}
+      <div class="input">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+
+      <div class="input">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+      </div>
+
+      <div class="input">
+        {{ form.password2.label_tag }}
+        {{ form.password2}}
+      </div>
+      <button type="submit">Sign-Up</button>
+    </form>
+    <a href="{% url 'login' %}?next={{request.GET.next}}">
+      Already have an account?
+    </a>
+  </div>
+</div>
 
 </html>
