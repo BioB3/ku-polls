@@ -1,0 +1,417 @@
+[
+{
+  "model": "polls.question",
+  "pk": 2,
+  "fields": {
+    "question_text": "How often do you code outside of class assignments and homework?",
+    "pub_date": "2024-08-25T07:23:50Z",
+    "end_date": "2025-12-31T17:00:00Z"
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 3,
+  "fields": {
+    "question_text": "How many years of programming experience do you have?",
+    "pub_date": "2024-08-25T07:39:59.382Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 4,
+  "fields": {
+    "question_text": "What's your favorite book genre?",
+    "pub_date": "2024-08-30T06:21:03Z",
+    "end_date": "2024-09-01T06:21:06Z"
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 5,
+  "fields": {
+    "question_text": "Are you an introvert, an extrovert, or an ambivert?",
+    "pub_date": "2024-12-31T17:00:00Z",
+    "end_date": "2025-01-01T17:00:00Z"
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 6,
+  "fields": {
+    "question_text": "What is your most used social media app?",
+    "pub_date": "2024-09-14T06:18:02Z",
+    "end_date": "2024-09-29T17:00:00Z"
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 7,
+  "fields": {
+    "question_text": "Is pineapple on pizza acceptable?",
+    "pub_date": "2024-09-14T06:28:30Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 8,
+  "fields": {
+    "question_text": "What's your favorite music genre?",
+    "pub_date": "2024-09-14T07:20:01Z",
+    "end_date": "2024-10-30T17:00:00Z"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 4,
+  "fields": {
+    "question": 2,
+    "choice_text": "Never"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 5,
+  "fields": {
+    "question": 2,
+    "choice_text": "Rarely (<= 20% of free time)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 6,
+  "fields": {
+    "question": 2,
+    "choice_text": "Sometimes (> 20%, <= 50% of free time)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 7,
+  "fields": {
+    "question": 2,
+    "choice_text": "Frequently (> 50% of free time)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 8,
+  "fields": {
+    "question": 3,
+    "choice_text": "Less than 1 year"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 9,
+  "fields": {
+    "question": 3,
+    "choice_text": "1-3 years"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 10,
+  "fields": {
+    "question": 3,
+    "choice_text": "3-5 years"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 11,
+  "fields": {
+    "question": 3,
+    "choice_text": "More then 5 years"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 12,
+  "fields": {
+    "question": 4,
+    "choice_text": "Fantasy"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 13,
+  "fields": {
+    "question": 4,
+    "choice_text": "Mystery"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 14,
+  "fields": {
+    "question": 4,
+    "choice_text": "Romance"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 15,
+  "fields": {
+    "question": 4,
+    "choice_text": "Horror"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 16,
+  "fields": {
+    "question": 4,
+    "choice_text": "Poetry"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 17,
+  "fields": {
+    "question": 4,
+    "choice_text": "Science Fiction"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 18,
+  "fields": {
+    "question": 4,
+    "choice_text": "Historical Fiction"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 19,
+  "fields": {
+    "question": 4,
+    "choice_text": "Others"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 20,
+  "fields": {
+    "question": 5,
+    "choice_text": "Introvert"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 21,
+  "fields": {
+    "question": 5,
+    "choice_text": "Extrovert"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 22,
+  "fields": {
+    "question": 5,
+    "choice_text": "Ambivert"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 23,
+  "fields": {
+    "question": 6,
+    "choice_text": "Facebook"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 24,
+  "fields": {
+    "question": 6,
+    "choice_text": "Instagram"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 25,
+  "fields": {
+    "question": 6,
+    "choice_text": "Telegram"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 26,
+  "fields": {
+    "question": 6,
+    "choice_text": "Line"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 27,
+  "fields": {
+    "question": 6,
+    "choice_text": "X (twitter)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 28,
+  "fields": {
+    "question": 6,
+    "choice_text": "Discord"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 29,
+  "fields": {
+    "question": 6,
+    "choice_text": "Reddit"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 30,
+  "fields": {
+    "question": 6,
+    "choice_text": "WhatsApp"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 31,
+  "fields": {
+    "question": 6,
+    "choice_text": "YouTube"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 32,
+  "fields": {
+    "question": 6,
+    "choice_text": "WeChat"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 33,
+  "fields": {
+    "question": 6,
+    "choice_text": "Others"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 34,
+  "fields": {
+    "question": 7,
+    "choice_text": "Strongly Agree"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 35,
+  "fields": {
+    "question": 7,
+    "choice_text": "Agree"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 36,
+  "fields": {
+    "question": 7,
+    "choice_text": "Neutral"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 37,
+  "fields": {
+    "question": 7,
+    "choice_text": "Disagree"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 38,
+  "fields": {
+    "question": 7,
+    "choice_text": "Strongly Disagree"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 39,
+  "fields": {
+    "question": 8,
+    "choice_text": "Country"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 40,
+  "fields": {
+    "question": 8,
+    "choice_text": "Hip Hop"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 41,
+  "fields": {
+    "question": 8,
+    "choice_text": "Jazz"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 42,
+  "fields": {
+    "question": 8,
+    "choice_text": "Pop"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 43,
+  "fields": {
+    "question": 8,
+    "choice_text": "Rock"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 44,
+  "fields": {
+    "question": 8,
+    "choice_text": "Metal"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 45,
+  "fields": {
+    "question": 8,
+    "choice_text": "R&B"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 46,
+  "fields": {
+    "question": 8,
+    "choice_text": "Folk"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 47,
+  "fields": {
+    "question": 8,
+    "choice_text": "Others"
+  }
+}
+]

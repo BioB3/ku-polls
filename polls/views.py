@@ -5,7 +5,10 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
-from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed
+from django.contrib.auth.signals import (
+    user_logged_in,
+    user_logged_out,
+    user_login_failed)
 from django.contrib.auth.decorators import login_required
 from django.dispatch import receiver
 from .models import Question, Choice, Vote
@@ -15,9 +18,9 @@ logger = logging.getLogger("polls")
 
 
 class IndexView(generic.ListView):
-    """Display the most recent 5 poll questions.
+    """Display poll questions sorted by date from newest to oldest.
 
-    :return: a rendered template with the most recent 5 questions
+    :return: a rendered template with all questions
     """
 
     template_name = 'polls/index.html'
@@ -64,8 +67,8 @@ class DetailView(generic.DetailView):
             messages.error(request, f"Poll ID {kwargs['pk']} does not exist.")
             return HttpResponseRedirect(reverse("polls:index"))
         if not question.can_vote():
-            messages.error(request,
-                           f"Voting is unavailable for Poll ID {kwargs['pk']}.")
+            messages.error(request, "Voting is unavailable for Poll ID" +
+                                    f"{kwargs['pk']}.")
             return HttpResponseRedirect(reverse("polls:index"))
         return super().get(request, *args, **kwargs)
 
@@ -73,16 +76,11 @@ class DetailView(generic.DetailView):
         """Create context dictionary used to render the template."""
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        try: 
+        try:
             selected_choice = kwargs["object"].choice_set.filter(
                 vote__user=user).first()
             vote = Vote.objects.get(user=user, choice=selected_choice)
-        except (KeyError, Vote.DoesNotExist):
-            logger.exception(f"Vote for question #{kwargs['object'].id}"
-                             f" from {user.username} does not exist")
-            vote = None
-        except TypeError:
-            logger.exception(f"Cannot retrieve vote for unauthenticated visitor")
+        except (TypeError, KeyError, Vote.DoesNotExist):
             vote = None
         context['vote'] = vote
         return context
@@ -116,9 +114,11 @@ class ResultsView(generic.DetailView):
             return HttpResponseRedirect(reverse("polls:index"))
         if not question.is_published():
             messages.error(request,
-                           f"Results for Poll ID {kwargs['pk']} are unavailable")
+                           f"Results for Poll ID {kwargs['pk']}" +
+                           "are unavailable")
             return HttpResponseRedirect(reverse("polls:index"))
         return super().get(request, *args, **kwargs)
+
 
 @login_required
 def vote(request, question_id):
@@ -142,17 +142,41 @@ def vote(request, question_id):
                                             args=(question_id,)))
 
     try:
-        vote = request.user.vote_set.get(choice__question=question)
+        vote = user.vote_set.get(choice__question=question)
         vote.choice = selected_choice
         vote.save()
-        messages.success(request,
-                         f"Your vote was changed to '{selected_choice.choice_text}'.")
+        messages.success(request, "Your vote was changed to" +
+                                  f"{selected_choice.choice_text}'.")
     except (KeyError, Vote.DoesNotExist):
-        vote = Vote.objects.create(user=request.user, choice=selected_choice)
+        vote = Vote.objects.create(user=user, choice=selected_choice)
         messages.success(request,
                          f"You voted for '{selected_choice.choice_text}'.")
 
     return HttpResponseRedirect(reverse('polls:results', args=(question_id,)))
+
+
+@login_required
+def remove_vote(request, question_id):
+    """Remove user's previous vote.
+
+    :param request: request from the visitor
+    :param question_id: id of the question
+    :return: redirect to the result page
+    """
+    question = get_object_or_404(Question, pk=question_id)
+    user = request.user
+    try:
+        vote = user.vote_set.get(choice__question=question)
+        vote.delete()
+        logger.info(f"{user.username} remove vote for question {question_id}")
+        messages.success(request, "Your vote has been removed.")
+    except (KeyError, Vote.DoesNotExist):
+        logger.warning(f"{user.username} failed to remove vote for question" +
+                       f"{question_id}")
+        messages.error("You have not voted for this question.")
+
+    return HttpResponseRedirect(reverse('polls:results', args=(question_id,)))
+
 
 def get_client_ip(request):
     """Get the visitor's IP address using request headers."""
@@ -165,11 +189,13 @@ def get_client_ip(request):
         return ip
     return None
 
+
 @receiver(user_logged_in)
 def user_login(sender, request, user, **kwargs):
     """Log successful login."""
     ip = get_client_ip(request)
     logger.info(f"user {user.username} logged in via ip: {ip}")
+
 
 @receiver(user_logged_out)
 def user_logout(sender, request, user, **kwargs):
@@ -177,8 +203,9 @@ def user_logout(sender, request, user, **kwargs):
     ip = get_client_ip(request)
     logger.info(f"user {user.username} logged out via ip: {ip}")
 
+
 @receiver(user_login_failed)
 def user_login_failed(sender, request, credentials, **kwargs):
-    """Log unsuccessful login"""
+    """Log unsuccessful login."""
     ip = get_client_ip(request)
     logger.warning(f"login failed for {credentials['username']} from ip: {ip}")
