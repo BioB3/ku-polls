@@ -70,7 +70,7 @@ class Choice(models.Model):
 
 class Vote(models.Model):
     """A vote by a user for a choice in a poll.
-    
+
     Related to :model:'Choice'
     """
 

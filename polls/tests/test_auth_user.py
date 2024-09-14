@@ -2,7 +2,7 @@
 import django.test
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate # to "login" a user using code
+from django.contrib.auth import authenticate
 from polls.models import Question, Choice
 from mysite import settings
 
@@ -11,7 +11,9 @@ class UserAuthTest(django.test.TestCase):
     """Tests of user authentication."""
 
     def setUp(self):
-        # superclass setUp creates a Client object and initializes test database
+        """Create user, question, choices, and url."""
+        # superclass setUp creates a Client object and
+        # initializes test database
         super().setUp()
         self.username = "testuser"
         self.password = "FatChance!"
@@ -26,7 +28,7 @@ class UserAuthTest(django.test.TestCase):
         q = Question.objects.create(question_text="First Poll Question")
         q.save()
         # a few choices
-        for n in range(1,4):
+        for n in range(1, 4):
             choice = Choice(choice_text=f"Choice {n}", question=q)
             choice.save()
         self.question = q
@@ -45,14 +47,14 @@ class UserAuthTest(django.test.TestCase):
         # user user with a session.  Setting client.user = ... doesn't work.
         # Use Client.login(username, password) to do that.
         # Client.login returns true on success
-        self.assertTrue( 
+        self.assertTrue(
               self.client.login(username=self.username, password=self.password)
                        )
         # visit the logout page
         form_data = {}
         response = self.client.post(logout_url, form_data)
         self.assertEqual(302, response.status_code)
-        
+
         # should redirect us to where? Polls index? Login?
         self.assertRedirects(response, reverse(settings.LOGOUT_REDIRECT_URL))
 
@@ -64,9 +66,9 @@ class UserAuthTest(django.test.TestCase):
         self.assertEqual(200, response.status_code)
         # Can login using a POST request
         # usage: client.post(url, {'key1":"value", "key2":"value"})
-        form_data = {"username": "testuser", 
+        form_data = {"username": "testuser",
                      "password": "FatChance!"
-                    }
+                     }
         response = self.client.post(login_url, form_data)
         # after successful login, should redirect browser somewhere
         self.assertEqual(302, response.status_code)
@@ -91,7 +93,7 @@ class UserAuthTest(django.test.TestCase):
         # should be redirected to the login page
         self.assertEqual(response.status_code, 302)  # could be 303
         login_with_next = f"{reverse('login')}?next={vote_url}"
-        self.assertRedirects(response, login_with_next )
+        self.assertRedirects(response, login_with_next)
 
     def test_invalid_user(self):
         """User can't login if the username is not registered."""
