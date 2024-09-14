@@ -9,6 +9,15 @@
   </head>
 
 <div class="auth">
+  {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+      <li class="{{message.tags}} center-text">
+        {{message}}
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
   <div class="form">
     <form class="auth-form" method="post">
       {% csrf_token %}
