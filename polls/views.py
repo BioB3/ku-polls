@@ -145,8 +145,8 @@ def vote(request, question_id):
         vote = user.vote_set.get(choice__question=question)
         vote.choice = selected_choice
         vote.save()
-        messages.success(request, "Your vote was changed to" +
-                                  f"{selected_choice.choice_text}'.")
+        messages.success(request, "Your vote was changed to " +
+                                  f"{selected_choice.choice_text}.")
     except (KeyError, Vote.DoesNotExist):
         vote = Vote.objects.create(user=user, choice=selected_choice)
         messages.success(request,
