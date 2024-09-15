@@ -9,18 +9,19 @@
   </head>
 
 <div class="auth">
-  {% if messages %}
-    <ul class="messages">
-    {% for message in messages %}
-      <li class="{{message.tags}} center-text">
-        {{message}}
-      </li>
-    {% endfor %}
-    </ul>
-  {% endif %}
   <div class="form">
     <form class="auth-form" method="post">
       {% csrf_token %}
+        {% if form.non_field_errors %}
+          {% for error in form.non_field_errors %}
+            <div style="color: red;">{{ error }}</div>
+          {% endfor %}
+        {% endif %}
+
+        {% for field in form %}
+          <div style="color: red;">{{ field.errors }}</div>
+        {% endfor %}
+
       <div class="input">
         {{ form.username.label_tag }}
         {{ form.username }}
@@ -38,7 +39,10 @@
       <button type="submit">Sign-Up</button>
     </form>
     <a href="{% url 'login' %}?next={{request.GET.next}}">
-      Already have an account?
+      <button style="background-color: blueviolet;">Already have an account?</button>
+    </a>
+    <a href="{% url 'polls:index' %}">
+      <button style="background-color: cadetblue;">Home</button>
     </a>
   </div>
 </div>
