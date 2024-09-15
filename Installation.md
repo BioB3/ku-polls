@@ -34,6 +34,8 @@ pip install -r requirements.txt
     ```
     copy sample.env .env
     ```
+    Change values in .env file as needed
+
 * Set up values using console
     ```
     echo "SECRET_KEY=your_secret_key_here" >> .env
@@ -41,6 +43,8 @@ pip install -r requirements.txt
     echo "ALLOWED_HOSTS=localhost,127.0.0.1,::1" >> .env
     echo "TIME_ZONE=Asia/Bangkok" >> .env
     ```
+    Don't forget to change values in the commands.
+
 7\. Run migrations
 ```
 python manage.py migrate
