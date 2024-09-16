@@ -146,7 +146,7 @@ def vote(request, question_id):
         vote.choice = selected_choice
         vote.save()
         messages.success(request, "Your vote was changed to " +
-                                  f"{selected_choice.choice_text}.")
+                                  f"'{selected_choice.choice_text}'.")
     except (KeyError, Vote.DoesNotExist):
         vote = Vote.objects.create(user=user, choice=selected_choice)
         messages.success(request,
@@ -173,7 +173,7 @@ def remove_vote(request, question_id):
     except (KeyError, Vote.DoesNotExist):
         logger.warning(f"{user.username} failed to remove vote for question" +
                        f"{question_id}")
-        messages.error("You have not voted for this question.")
+        messages.error(request, "You have not voted for this question.")
 
     return HttpResponseRedirect(reverse('polls:results', args=(question_id,)))
 
@@ -205,7 +205,7 @@ def user_logout(sender, request, user, **kwargs):
 
 
 @receiver(user_login_failed)
-def user_login_failed(sender, request, credentials, **kwargs):
+def user_failed_login(sender, request, credentials, **kwargs):
     """Log unsuccessful login."""
     ip = get_client_ip(request)
     logger.warning(f"login failed for {credentials['username']} from ip: {ip}")
