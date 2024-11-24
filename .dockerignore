@@ -1,0 +1,10 @@
+.github
+.mypy_cache
+env
+.env
+*.sqlite3
+__pycache__
+.coverage
+.coveragerc
+*.log
+db
